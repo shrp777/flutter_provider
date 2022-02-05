@@ -1,16 +1,24 @@
-# flutter_provider
+# Provider 
 
-A new Flutter project.
+Gestion d'état applicatif dans une application Flutter avec les packages Provider, ChangeNotifier, ChangeNotifierProvider et Consumer.
 
-## Getting Started
+https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+__Alexandre Leroux__
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- alex@sherpa.one
+- https://sherpa.one
+- sherpa#3890
+- https://github.com/sherpa1/
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+_Développeur Full Stack (Web & Mobile)_
+
+_Enseignant vacataire à l'Université de Lorraine / Formateur indépendant_
+
+- IUT Nancy-Charlemagne (LP Ciasie)
+
+- Institut des Sciences du Digital, Management & Cognition (Masters Sciences Cognitives)
+
+- CESI Alternance (Concepteur développeur d'applications - Manager en architecture et application logicielles des systèmes d'information) 
