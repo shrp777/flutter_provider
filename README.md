@@ -1,6 +1,9 @@
 # Provider 
 
-Gestion d'état applicatif dans une application Flutter avec les packages Provider, ChangeNotifier, ChangeNotifierProvider et Consumer.
+Gestion d'état applicatif dans une application Flutter avec le package Provider (ChangeNotifier, ChangeNotifierProvider et Consumer).
+
+- Provider : https://pub.dev/packages/provider
+
 
 https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple
 
