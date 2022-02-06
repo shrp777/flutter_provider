@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'my_home_page.dart';
+import 'users_list.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,7 +12,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Refactor'),
+      home: const UsersList(),
+      routes: {
+        UsersList.routeName: (context) => const UsersList(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == UserDetailsArguments.routeName) {
+          final args = settings.arguments as UserDetailsArguments;
+
+          return MaterialPageRoute(builder: (context) {
+            return UserDetails(
+              user: args.user,
+            );
+          });
+        }
+      },
     );
   }
 }

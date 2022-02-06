@@ -7,6 +7,12 @@ Gestion d'état applicatif dans une application Flutter avec le package Provider
 
 https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple
 
+## Documentation
+
+- Faker : https://pub.dev/packages/faker
+- Provider : https://pub.dev/packages/provider
+- UUID : https://pub.dev/packages/uuid
+
 ---
 
 __Alexandre Leroux__
