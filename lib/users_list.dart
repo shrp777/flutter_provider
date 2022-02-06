@@ -83,41 +83,33 @@ class UsersCollection extends ChangeNotifier {
   }
 }
 
-class UsersList extends StatefulWidget {
+class UsersList extends StatelessWidget {
   const UsersList({Key? key, required this.users}) : super(key: key);
 
   final UsersCollection users;
 
   static const routeName = '/users-master';
 
-  @override
-  State<UsersList> createState() => _UsersListState();
-}
-
-class _UsersListState extends State<UsersList> {
-  var uuid = const Uuid();
-  var rng = Random();
-
   void _onPress() {
-    setState(() {
-      widget.users.add(
-        User(
-          uuid.v4(),
-          faker.person.firstName(),
-          faker.person.lastName(),
-          faker.internet.email(),
-          (rng.nextInt(1) > 0) ? "Male" : "Female",
-        ),
-      );
-    });
+    var uuid = const Uuid();
+    var rng = Random();
+    users.add(
+      User(
+        uuid.v4(),
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.internet.email(),
+        (rng.nextInt(1) > 0) ? "Male" : "Female",
+      ),
+    );
   }
 
   Widget _usersList() {
     return ListView.separated(
       padding: const EdgeInsets.all(0),
-      itemCount: widget.users.length(),
+      itemCount: users.length(),
       itemBuilder: (BuildContext context, int index) {
-        return UserPreview(user: widget.users.findAt(index));
+        return UserPreview(user: users.findAt(index), users: users);
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
@@ -139,42 +131,30 @@ class _UsersListState extends State<UsersList> {
   }
 }
 
-class UserPreview extends StatefulWidget {
-  const UserPreview({Key? key, required this.user}) : super(key: key);
+class UserPreview extends StatelessWidget {
+  const UserPreview({Key? key, required this.user, required this.users})
+      : super(key: key);
 
   final User user;
-
-  @override
-  State<UserPreview> createState() => _UserPreviewState();
-}
-
-class _UserPreviewState extends State<UserPreview> {
-  late User? user;
-
-  @override
-  initState() {
-    super.initState();
-    user = widget.user;
-  }
-
-  void onTap() {
-    Navigator.pushNamed(
-      context,
-      UserDetailsArguments.routeName,
-      arguments: UserDetailsArguments(user: widget.user),
-    );
-  }
-
-  void _onFavoriteUpdate(bool favorite) {
-    setState(() {
-      user!.favorite = favorite;
-    });
-  }
+  final UsersCollection users;
 
   @override
   Widget build(BuildContext context) {
+    void onTap() {
+      Navigator.pushNamed(
+        context,
+        UserDetailsArguments.routeName,
+        arguments: UserDetailsArguments(user: user),
+      );
+    }
+
+    void _onFavoriteUpdate(bool favorite) {
+      user.favorite = favorite;
+      users.update(user);
+    }
+
     return Container(
-      color: user!.favorite == true ? Colors.red[50] : null,
+      color: user.favorite == true ? Colors.red[50] : null,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,7 +164,7 @@ class _UserPreviewState extends State<UserPreview> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                user!.fullname(),
+                user.fullname(),
                 style: const TextStyle(
                   color: Colors.blue,
                   fontWeight: FontWeight.bold,
@@ -193,39 +173,24 @@ class _UserPreviewState extends State<UserPreview> {
               ),
             ),
           ),
-          ToggleFavorite(user: user!, onUpdate: _onFavoriteUpdate)
+          ToggleFavorite(user: user, onUpdate: _onFavoriteUpdate)
         ],
       ),
     );
   }
 }
 
-class UserDetails extends StatefulWidget {
+class UserDetails extends StatelessWidget {
   const UserDetails({Key? key, required this.user, required this.users})
       : super(key: key);
 
   final User user;
   final UsersCollection users;
 
-  @override
-  State<UserDetails> createState() => _UserDetailsState();
-}
-
-class _UserDetailsState extends State<UserDetails> {
-  late User user;
-
-  @override
-  void initState() {
-    super.initState();
-    user = widget.user;
-  }
-
   void _onFavoriteUpdate(bool favorite) {
-    setState(() {
-      user.favorite = favorite;
-      widget.user.favorite = favorite;
-      widget.users.update(user);
-    });
+    user.favorite = favorite;
+    user.favorite = favorite;
+    users.update(user);
   }
 
   @override
@@ -258,33 +223,18 @@ class UserDetailsArguments {
   UserDetailsArguments({required this.user});
 }
 
-class ToggleFavorite extends StatefulWidget {
+class ToggleFavorite extends StatelessWidget {
   const ToggleFavorite({Key? key, required this.user, required this.onUpdate})
       : super(key: key);
 
   final User user;
   final Function onUpdate;
 
-  @override
-  State<ToggleFavorite> createState() => _ToggleFavoriteState();
-}
-
-class _ToggleFavoriteState extends State<ToggleFavorite> {
-  late User user;
-
-  @override
-  void initState() {
-    super.initState();
-    user = widget.user;
-  }
-
   void _toggle() {
     var newValue = (user.favorite == true) ? false : true;
 
-    setState(() {
-      user.favorite = newValue;
-      widget.onUpdate(user.favorite);
-    });
+    user.favorite = newValue;
+    onUpdate(user.favorite);
   }
 
   @override
