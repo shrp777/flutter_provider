@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
 import 'package:uuid/uuid.dart';
@@ -18,8 +20,73 @@ class User {
   }
 }
 
+class UsersCollection extends ChangeNotifier {
+  final List<User> _users = [];
+
+  UsersCollection() {
+    var rng = Random();
+    var uuid = const Uuid();
+
+    for (var i = 0; i < 50; i++) {
+      _users.add(
+        User(
+          uuid.v4(),
+          faker.person.firstName(),
+          faker.person.lastName(),
+          faker.internet.email(),
+          (rng.nextInt(1) > 0) ? "Male" : "Female",
+        ),
+      );
+    }
+  }
+
+  UnmodifiableListView<User> get users => UnmodifiableListView(_users);
+
+  void add(User user) {
+    _users.add(user);
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  void remove(User user) {
+    _users.remove(user);
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  void update(User user) {
+    var index = _users.indexOf(user);
+
+    _users[index] = user;
+
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  int length() {
+    return _users.length;
+  }
+
+  User find(User user) {
+    var index = _users.indexOf(user);
+    return _users[index];
+  }
+
+  User findAt(int index) {
+    return _users[index];
+  }
+
+  void removeAll() {
+    _users.clear();
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+}
+
 class UsersList extends StatefulWidget {
-  const UsersList({Key? key}) : super(key: key);
+  const UsersList({Key? key, required this.users}) : super(key: key);
+
+  final UsersCollection users;
 
   static const routeName = '/users-master';
 
@@ -28,31 +95,12 @@ class UsersList extends StatefulWidget {
 }
 
 class _UsersListState extends State<UsersList> {
-  var _users = <User>[];
-
   var uuid = const Uuid();
   var rng = Random();
 
-  @override
-  initState() {
-    super.initState();
-
-    _users = List.generate(
-      50,
-      (index) => User(
-        uuid.v4(),
-        faker.person.firstName(),
-        faker.person.lastName(),
-        faker.internet.email(),
-        (rng.nextInt(1) > 0) ? "Male" : "Female",
-      ),
-    );
-  }
-
   void _onPress() {
     setState(() {
-      _users.insert(
-        0,
+      widget.users.add(
         User(
           uuid.v4(),
           faker.person.firstName(),
@@ -67,9 +115,9 @@ class _UsersListState extends State<UsersList> {
   Widget _usersList() {
     return ListView.separated(
       padding: const EdgeInsets.all(0),
-      itemCount: _users.length,
+      itemCount: widget.users.length(),
       itemBuilder: (BuildContext context, int index) {
-        return UserPreview(user: _users[index]);
+        return UserPreview(user: widget.users.findAt(index));
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
@@ -153,9 +201,11 @@ class _UserPreviewState extends State<UserPreview> {
 }
 
 class UserDetails extends StatefulWidget {
-  const UserDetails({Key? key, required this.user}) : super(key: key);
+  const UserDetails({Key? key, required this.user, required this.users})
+      : super(key: key);
 
   final User user;
+  final UsersCollection users;
 
   @override
   State<UserDetails> createState() => _UserDetailsState();
@@ -174,6 +224,7 @@ class _UserDetailsState extends State<UserDetails> {
     setState(() {
       user.favorite = favorite;
       widget.user.favorite = favorite;
+      widget.users.update(user);
     });
   }
 
