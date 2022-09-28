@@ -43,7 +43,7 @@ class UsersCollection extends ChangeNotifier {
   UnmodifiableListView<User> get users => UnmodifiableListView(_users);
 
   void add(User user) {
-    _users.add(user);
+    _users.insert(0, user);
     // This call tells the widgets that are listening to this model to rebuild.
     notifyListeners();
   }
