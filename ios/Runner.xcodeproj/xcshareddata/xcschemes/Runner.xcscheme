@@ -37,8 +37,6 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
-<<<<<<< HEAD
-=======
          <TestableReference
             skipped = "NO"
             parallelizable = "YES">
@@ -50,7 +48,6 @@
                ReferencedContainer = "container:Runner.xcodeproj">
             </BuildableReference>
          </TestableReference>
->>>>>>> cbbfb4d (first commit)
       </Testables>
    </TestAction>
    <LaunchAction

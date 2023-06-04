@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_provider">
-   <application
-        android:label="flutter_provider"
-=======
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="provider_demo"
->>>>>>> cbbfb4d (first commit)
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

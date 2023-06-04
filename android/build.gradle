@@ -1,20 +1,12 @@
 buildscript {
-<<<<<<< HEAD
-    ext.kotlin_version = '1.3.50'
-=======
     ext.kotlin_version = '1.7.10'
->>>>>>> cbbfb4d (first commit)
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-<<<<<<< HEAD
-        classpath 'com.android.tools.build:gradle:4.1.0'
-=======
         classpath 'com.android.tools.build:gradle:7.3.0'
->>>>>>> cbbfb4d (first commit)
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -34,10 +26,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-<<<<<<< HEAD
-task clean(type: Delete) {
-=======
 tasks.register("clean", Delete) {
->>>>>>> cbbfb4d (first commit)
     delete rootProject.buildDir
 }

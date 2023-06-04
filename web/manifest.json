@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
-    "name": "flutter_provider",
-    "short_name": "flutter_provider",
-=======
     "name": "provider_demo",
     "short_name": "provider_demo",
->>>>>>> cbbfb4d (first commit)
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
