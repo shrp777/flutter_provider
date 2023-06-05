@@ -5,7 +5,9 @@ import 'item.dart';
 class ItemsProvider extends ChangeNotifier {
   final List<Item> _items = [];
 
-  List<Item> get items => _items;
+  List<Item> get items => List.unmodifiable(_items);
+  //in order to send notifications to consumers
+  //_items must not be modifiable from the outside
 
   add(Item item) {
     _items.add(item);
