@@ -1,6 +1,6 @@
 {
-    "name": "provider_demo",
-    "short_name": "provider_demo",
+    "name": "pizzas_prvd",
+    "short_name": "pizzas_prvd",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

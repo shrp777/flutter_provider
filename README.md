@@ -1,16 +1,15 @@
-# Provider Demo
+# Pizzas Prvd
 
 Projet de démonstration du concept d'état applicatif global implémenté avec Provider.
 
 --
 
-<img src="https://sherpa.one/images/sherpa-logotype.png" width="120px">
+!["Logotype Shrp"](https://sherpa.one/images/sherpa-logotype.png)
 
-__Alexandre Leroux__
-
-_Enseignant / Formateur_<br>
+__Alexandre Leroux__  
+_Enseignant / Formateur_  
 _Développeur logiciel web & mobile_
 
 Nancy (Grand Est, France)
 
-https://sherpa.one
+<https://shrp.dev>

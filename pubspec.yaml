@@ -1,10 +1,10 @@
-name: provider_demo
-description: A new Flutter project.
-publish_to: 'none'
+name: pizzas_prvd
+description: Provider Proof of Concept
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: ">=3.0.1 <4.0.0"
 
 dependencies:
   flutter:
